@@ -10,7 +10,7 @@ $(document).ready(function(e) {
 function newGame() {
   //初始化棋盘格
   init();
-  //随机生成两个数字
+  //随机生成两个数字git@github.com:Bafangtongxing/javascript2048.git
   generateOneNumber();
   generateOneNumber();
 }
