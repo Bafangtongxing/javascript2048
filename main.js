@@ -18,7 +18,6 @@ function newGame() {
 function init() {
   score = 0;
   $(".score").innerHTML = score;
-  $(".gameover").css("display", "none");
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
       var gridCell = $(`#grid-cell-${i}-${j}`);
@@ -100,7 +99,7 @@ $(document).keydown(function(e) {
         updateScore();
         generateOneNumber();
         isVictory();
-        isGameover();
+        setTimeout(isGameover, 500);
       }
       break;
     case 38: //up
@@ -109,7 +108,7 @@ $(document).keydown(function(e) {
         updateScore();
         generateOneNumber();
         isVictory();
-        isGameover();
+        setTimeout(isGameover, 500);
       }
       break;
     case 39: //right
@@ -118,7 +117,7 @@ $(document).keydown(function(e) {
         updateScore();
         generateOneNumber();
         isVictory();
-        isGameover();
+        setTimeout(isGameover, 500);
       }
       break;
     case 40: //down
@@ -127,7 +126,7 @@ $(document).keydown(function(e) {
         updateScore();
         generateOneNumber();
         isVictory();
-        isGameover();
+        setTimeout(isGameover, 500);
       }
       break;
   }

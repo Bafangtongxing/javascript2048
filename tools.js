@@ -75,8 +75,11 @@ function canMoveLeft(board) {
   for (let i = 0; i < 4; i++) {
     for (let j = 1; j < 4; j++) {
       if (board[i][j] != 0) {
-        if (board[i][j - 1] === 0 || board[i][j - 1] === board[i][j])
+        if (board[i][j - 1] === 0 || board[i][j - 1] === board[i][j]) {
+          // console.log("能左");
+
           return true;
+        }
       }
     }
   }
@@ -88,8 +91,10 @@ function canMoveTop(board) {
   for (let i = 1; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
       if (board[i][j] != 0) {
-        if (board[i - 1][j] === 0 || board[i - 1][j] === board[i][j])
+        if (board[i - 1][j] === 0 || board[i - 1][j] === board[i][j]) {
+          // console.log("能上");
           return true;
+        }
       }
     }
   }
@@ -101,8 +106,10 @@ function canMoveRight(board) {
   for (let i = 0; i < 4; i++) {
     for (let j = 2; j >= 0; j--) {
       if (board[i][j] != 0) {
-        if (board[i][j + 1] === 0 || board[i][j + 1] === board[i][j])
+        if (board[i][j + 1] === 0 || board[i][j + 1] === board[i][j]) {
+          // console.log("能右");
           return true;
+        }
       }
     }
   }
@@ -113,8 +120,10 @@ function canMoveBottom(board) {
   for (let i = 2; i >= 0; i--) {
     for (let j = 0; j < 4; j++) {
       if (board[i][j] != 0) {
-        if (board[i + 1][j] === 0 || board[i + 1][j] === board[i][j])
+        if (board[i + 1][j] === 0 || board[i + 1][j] === board[i][j]) {
+          // console.log("能下");
           return true;
+        }
       }
     }
   }
@@ -157,7 +166,7 @@ function isGameover() {
 function isVictory() {
   for (let i = 0; i < 4; i++) {
     for (let j = 0; j < 4; j++) {
-      if (board[i][j] === 128) {
+      if (board[i][j] === 2048) {
         victory();
       }
     }
@@ -165,12 +174,18 @@ function isVictory() {
 }
 
 function gameover() {
+  $(".grid-container").addClass("gameover");
   let answer = confirm(
     `Game Over! 你的分数是 ${score} 分! 再来一局吗？`,
     "再来一局!",
     "不玩了不玩了"
   );
-  answer ? newGame() : window.close();
+  if (answer) {
+    newGame();
+    location.reload();
+  } else {
+    window.close();
+  }
 }
 
 function victory() {
@@ -179,5 +194,10 @@ function victory() {
     "再来一局!",
     "不玩了不玩了"
   );
-  answer ? newGame() : window.close();
+  if (answer) {
+    newGame();
+    location.reload();
+  } else {
+    window.close();
+  }
 }
