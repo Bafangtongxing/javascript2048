@@ -2,7 +2,7 @@ var board = new Array(); //board是一个二维数组,4x4大小，
 var added = new Array();
 var score = 0;
 var top = 240;
-
+var best = localStorage.getItem("best") || 0;
 $(document).ready(function(e) {
   newGame();
 });
@@ -12,30 +12,33 @@ function newGame() {
   init();
   //随机生成两个数字git@github.com:Bafangtongxing/javascript2048.git
   generateOneNumber();
+  updateBoardView();
   generateOneNumber();
+  updateBoardView();
 }
 
 function init() {
   score = 0;
-  $(".score").innerHTML = score;
-  for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
-      var gridCell = $(`#grid-cell-${i}-${j}`);
+  $(".score").html(score);
+  $(".best").html(best);
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
+      let gridCell = $(`#grid-cell-${i}-${j}`);
       gridCell.css("top", getPosTop(i));
       gridCell.css("left", getPosLeft(j));
     }
   }
 
-  for (var i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     board[i] = new Array();
-    for (var j = 0; j < 4; j++) {
+    for (let j = 0; j < 4; j++) {
       board[i][j] = 0; //0代表格子为空
     }
   }
 
-  for (var i = 0; i < 4; i++) {
+  for (let i = 0; i < 4; i++) {
     added[i] = new Array();
-    for (var j = 0; j < 4; j++) {
+    for (let j = 0; j < 4; j++) {
       added[i][j] = 0;
     }
   }
@@ -51,20 +54,21 @@ function updateBoardView() {
       );
       let theNumberCell = $(`#number-cell-${i}-${j}`);
       if (board[i][j] == 0) {
-        theNumberCell.css("width", "0px");
-        theNumberCell.css("height", "0px");
-        theNumberCell.css("top", getPosTop(i));
-        theNumberCell.css("left", getPosLeft(j));
+        theNumberCell.css({
+          width: "0px",
+          height: "0px",
+          top: getPosTop(i),
+          left: getPosLeft(j)
+        });
       } else {
-        theNumberCell.css("width", "100px");
-        theNumberCell.css("hegiht", "100px");
-        theNumberCell.css("top", getPosTop(i));
-        theNumberCell.css("left", getPosLeft(j));
-        theNumberCell.css(
-          "background-color",
-          getNumberBackgroundColor(board[i][j])
-        );
-        theNumberCell.css("color", getNumberColor(board[i][j]));
+        theNumberCell.css({
+          width: "100px",
+          height: "100px",
+          top: getPosTop(i),
+          left: getPosLeft(j),
+          backgroundColor: getNumberBackgroundColor(board[i][j]),
+          color: getNumberColor(board[i][j])
+        });
         theNumberCell.text(board[i][j]);
       }
     }

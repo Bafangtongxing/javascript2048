@@ -35,7 +35,7 @@ header #newgamebutton {
   padding: 10px;
   background: #cdc1b4;
   font-family: Arial;
-  color: white;
+  color: #222;
   font-size: 30px;
   border-radius: 30px;
   text-decoration: none;
@@ -43,13 +43,20 @@ header #newgamebutton {
 
 header #newgamebutton:hover {
   background: #9f8b77;
+  color:white;
 }
 
-header p {
+header div.scores {
   font-family: "Microsoft Yahei";
   font-size: 25px;
   margin: 25px auto;
+  display: flex;
 }
+
+header div.scores div{
+  flex: 1;
+}
+
 
 .grid-container {
   width: 460px;

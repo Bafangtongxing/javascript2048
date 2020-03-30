@@ -44,8 +44,8 @@ function getNumberColor(number) {
 }
 
 function isaddedArray() {
-  for (var i = 0; i < 4; i++) {
-    for (var j = 0; j < 4; j++) {
+  for (let i = 0; i < 4; i++) {
+    for (let j = 0; j < 4; j++) {
       added[i][j] = 0;
     }
   }
@@ -61,7 +61,7 @@ function blockHorizontal(row, col1, col2, board) {
 
 //判断竖直方向是否有障碍物
 function blockVertical(col, row1, row2, board) {
-  for (var i = row1 + 1; i < row2; i++) {
+  for (let i = row1 + 1; i < row2; i++) {
     if (board[i][col] != 0) return true;
   }
   return false;
@@ -76,8 +76,6 @@ function canMoveLeft(board) {
     for (let j = 1; j < 4; j++) {
       if (board[i][j] != 0) {
         if (board[i][j - 1] === 0 || board[i][j - 1] === board[i][j]) {
-          // console.log("能左");
-
           return true;
         }
       }
@@ -92,7 +90,6 @@ function canMoveTop(board) {
     for (let j = 0; j < 4; j++) {
       if (board[i][j] != 0) {
         if (board[i - 1][j] === 0 || board[i - 1][j] === board[i][j]) {
-          // console.log("能上");
           return true;
         }
       }
@@ -107,7 +104,6 @@ function canMoveRight(board) {
     for (let j = 2; j >= 0; j--) {
       if (board[i][j] != 0) {
         if (board[i][j + 1] === 0 || board[i][j + 1] === board[i][j]) {
-          // console.log("能右");
           return true;
         }
       }
@@ -121,7 +117,6 @@ function canMoveBottom(board) {
     for (let j = 0; j < 4; j++) {
       if (board[i][j] != 0) {
         if (board[i + 1][j] === 0 || board[i + 1][j] === board[i][j]) {
-          // console.log("能下");
           return true;
         }
       }
@@ -132,8 +127,6 @@ function canMoveBottom(board) {
 //-------------------------------------------------------------------------
 
 function updateScore() {
-  console.log(score);
-
   $(".score").html(score);
 }
 
@@ -175,6 +168,10 @@ function isVictory() {
 
 function gameover() {
   $(".grid-container").addClass("gameover");
+  if (score > best) {
+    best = score;
+    localStorage.setItem("best", best);
+  }
   let answer = confirm(
     `Game Over! 你的分数是 ${score} 分! 再来一局吗？`,
     "再来一局!",
@@ -189,6 +186,10 @@ function gameover() {
 }
 
 function victory() {
+  if (score > best) {
+    best = score;
+    localStorage.setItem("best", best);
+  }
   let answer = confirm(
     `恭喜你通关了，太强了! 再来一局吗？`,
     "再来一局!",
