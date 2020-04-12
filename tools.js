@@ -153,6 +153,7 @@ function canmove(board) {
 function update() {
   updateScore();
   generateOneNumber();
+  updateBoardView();
   isVictory();
   setTimeout(isGameover, 500);
 }
