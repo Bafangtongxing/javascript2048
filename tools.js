@@ -150,6 +150,13 @@ function canmove(board) {
   );
 }
 
+function update() {
+  updateScore();
+  generateOneNumber();
+  isVictory();
+  setTimeout(isGameover, 500);
+}
+
 function isGameover() {
   if (nospace(board) && !canmove(board)) {
     gameover();

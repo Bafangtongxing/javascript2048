@@ -3,14 +3,14 @@ var added = new Array();
 var score = 0;
 var top = 240;
 var best = localStorage.getItem("best") || 0;
-$(document).ready(function(e) {
+$(document).ready(function (e) {
   newGame();
 });
 
 function newGame() {
   //初始化棋盘格
   init();
-  //随机生成两个数字git@github.com:Bafangtongxing/javascript2048.git
+  //随机生成两个数字
   generateOneNumber();
   updateBoardView();
   generateOneNumber();
@@ -58,7 +58,7 @@ function updateBoardView() {
           width: "0px",
           height: "0px",
           top: getPosTop(i),
-          left: getPosLeft(j)
+          left: getPosLeft(j),
         });
       } else {
         theNumberCell.css({
@@ -67,7 +67,7 @@ function updateBoardView() {
           top: getPosTop(i),
           left: getPosLeft(j),
           backgroundColor: getNumberBackgroundColor(board[i][j]),
-          color: getNumberColor(board[i][j])
+          color: getNumberColor(board[i][j]),
         });
         theNumberCell.text(board[i][j]);
       }
@@ -95,42 +95,30 @@ function generateOneNumber() {
 }
 
 //键盘输入事件
-$(document).keydown(function(e) {
+$(document).keydown(function (e) {
   switch (e.keyCode) {
     case 37: //left
       if (canMoveLeft(board)) {
         moveLeft();
-        updateScore();
-        generateOneNumber();
-        isVictory();
-        setTimeout(isGameover, 500);
+        update();
       }
       break;
     case 38: //up
       if (canMoveTop(board)) {
         moveTop();
-        updateScore();
-        generateOneNumber();
-        isVictory();
-        setTimeout(isGameover, 500);
+        update();
       }
       break;
     case 39: //right
       if (canMoveRight(board)) {
         moveRight();
-        updateScore();
-        generateOneNumber();
-        isVictory();
-        setTimeout(isGameover, 500);
+        update();
       }
       break;
     case 40: //down
       if (canMoveBottom(board)) {
         moveBottom();
-        updateScore();
-        generateOneNumber();
-        isVictory();
-        setTimeout(isGameover, 500);
+        update();
       }
       break;
   }
